@@ -219,12 +219,7 @@ def model_training(
         output_path=output_path,
     )
 
-
-if __name__ == "__main__":
-
-    parser = create_parser()
-
-    args = parser.parse_args()
+def main(args):
     model_name = args.model
     train_data_path = args.input_path
     evaluator_data_path = args.evaluator_path
@@ -232,6 +227,8 @@ if __name__ == "__main__":
     train_batch_size = args.train_batch_size
     epoch_size = args.epoch_size
     samples_per_label = args.samples_per_label
+
+    
 
     model_training(
         train_data_path,
@@ -242,3 +239,12 @@ if __name__ == "__main__":
         epoch_size,
         samples_per_label,
     )
+   
+
+if __name__ == "__main__":
+    parser = create_parser()
+
+    args = parser.parse_args()
+
+    main(args)
+   
