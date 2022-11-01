@@ -37,6 +37,42 @@ import read_files as read
 # from transformer_custom import Transformer
 
 
+def create_parser():
+    parser = argparse.ArgumentParser(
+        description='The training of the triplet network.')
+
+    parser.add_argument('--model',
+                        help='the direcotory of the BERT-based model',
+                        required=True)
+
+    parser.add_argument('--input_path',
+                        help='the path of the input training data',
+                        required=True)
+
+    parser.add_argument('--evaluator_path',
+                        help='the path of the evaluator, the dev dataset',
+                        required=True)
+
+    parser.add_argument('--output_path',
+                        help='the direcotory to save the models',
+                        required=True)
+
+    parser.add_argument(
+        '--train_batch_size',
+        help='the training batch size, typically, larger is better',
+        required=True)
+
+    parser.add_argument('--epoch_size',
+                        help='The number of epoch size',
+                        required=True)
+
+    parser.add_argument('--samples_per_label',
+                        help='The number of instances for each concept. ',
+                        required=True)
+
+    return parser
+
+
 # Inspired from torchnlp
 def read_dataset(train_data_path):
 
@@ -185,37 +221,8 @@ def model_training(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description='The training of the triplet network.')
 
-    parser.add_argument('--model',
-                        help='the direcotory of the BERT-based model',
-                        required=True)
-
-    parser.add_argument('--input_path',
-                        help='the path of the input training data',
-                        required=True)
-
-    parser.add_argument('--evaluator_path',
-                        help='the path of the evaluator, the dev dataset',
-                        required=True)
-
-    parser.add_argument('--output_path',
-                        help='the direcotory to save the models',
-                        required=True)
-
-    parser.add_argument(
-        '--train_batch_size',
-        help='the training batch size, typically, larger is better',
-        required=True)
-
-    parser.add_argument('--epoch_size',
-                        help='The number of epoch size',
-                        required=True)
-
-    parser.add_argument('--samples_per_label',
-                        help='The number of instances for each concept. ',
-                        required=True)
+    parser = create_parser()
 
     args = parser.parse_args()
     model_name = args.model
