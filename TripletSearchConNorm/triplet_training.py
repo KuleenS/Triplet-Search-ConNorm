@@ -19,9 +19,6 @@ import argparse
 import csv
 import logging
 import os
-import random
-import urllib.request
-from collections import defaultdict
 from datetime import datetime
 
 # from BatchHardSoftMarginTripletLoss import BatchHardSoftMarginTripletLoss
@@ -30,7 +27,7 @@ from sentence_transformers.datasets import SentenceLabelDataset
 from sentence_transformers.readers import InputExample
 from torch.utils.data import DataLoader
 
-import read_files as read
+import TripletSearchConNorm.TripletSearchConNorm.preprocess.read_files as read
 
 # from Pooling_custom import Pooling
 # from SentenceLabelDateset_custom import SentenceLabelDataset
