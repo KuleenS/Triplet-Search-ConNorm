@@ -110,7 +110,7 @@ def model_training(
         handlers=[LoggingHandler()],
     )
 
-    output_path = (output_path + datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))
+    output_path = os.path.join(output_path, datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))
 
     os.makedirs(output_path, exist_ok=True)
 
@@ -205,11 +205,9 @@ def model_training(
         train_objectives=[(train_dataloader, train_loss)],
         # evaluator = None,
         evaluator=ir_evaluator_n2c2_dev,
-        output_path_ignore_not_empty=True,
         optimizer_params={
             'lr': 1e-4,
             'eps': 1e-6,
-            'correct_bias': False
         },
         epochs=num_epochs,
         warmup_steps=warmup_steps,
