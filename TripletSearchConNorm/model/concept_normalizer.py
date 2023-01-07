@@ -14,7 +14,7 @@ import transformers
 from sentence_transformers import SentenceTransformer, models
 from sklearn.metrics.pairwise import cosine_similarity
 
-import read_files as read
+import TripletSearchConNorm.TripletSearchConNorm.preprocess.read_files as read
 
 
 class ConceptNormalizer():

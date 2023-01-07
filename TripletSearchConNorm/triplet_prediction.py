@@ -1,5 +1,5 @@
 from venv import create
-from concept_normalizer import ConceptNormalizer
+from TripletSearchConNorm.TripletSearchConNorm.model.concept_normalizer import ConceptNormalizer
 import argparse
 import pandas as pd
 
