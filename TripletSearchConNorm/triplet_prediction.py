@@ -1,7 +1,8 @@
-from venv import create
+import os
 from TripletSearchConNorm.TripletSearchConNorm.model.concept_normalizer import ConceptNormalizer
 import argparse
 import pandas as pd
+
 
 
 def create_parser():
@@ -29,7 +30,7 @@ def main(args):
     
     outdf = pd.DataFrame(output_data, columns =['Entity', 'CUI'])
 
-    outdf.to_csv(args.output_path)
+    outdf.to_csv(os.path.join(args.output_path, "TripletPreds.csv"), index = False)
 
 
 if __name__=="__main__":
