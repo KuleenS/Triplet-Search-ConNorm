@@ -15,22 +15,33 @@ def create_parser():
     return parser
 
 def main(args):
-    normalizer = ConceptNormalizer(model_name_or_path=args.model)
+    normalizer = ConceptNormalizer(model_name_or_path=args.model, sentence_transformer=True)
     normalizer.load_ontology(args.ontology_path)
 
-    df = pd.read_csv(args.data_path)
+    df = pd.read_csv(args.data_path, sep="\|\|", names=["abstract_id", "offset", "type", "mention", "entity_ids"])
+
+    df[['offset_start','offset_finish']] = df.offset.str.split(pat="|", expand=True)
+
+    df.reset_index(inplace=True)
+    df = df.rename(columns = {'index':'id'})
+
+    df = df[["id", "abstract_id", "offset_start", "offset_finish", "type", "mention", "entity_ids"]]
 
     output_data = []
 
     for tuplerow in df.itertuples():
 
-        normalized_entity = normalizer.normalize(tuplerow[0], top_k=1)
+        normalized_entity = normalizer.normalize(tuplerow.mention, top_k=1)
 
-        output_data.append((tuplerow[0], normalized_entity[0]))
+        output_data.append(normalized_entity[0][0])
     
-    outdf = pd.DataFrame(output_data, columns =['Entity', 'CUI'])
+    df['entity_ids'] = output_data
 
-    outdf.to_csv(os.path.join(args.output_path, "TripletPreds.csv"), index = False)
+
+    if not os.path.exists(args.output_path):
+        os.makedirs(args.output_path, exist_ok = True)
+
+    df.to_csv(os.path.join(args.output_path, "TripletPreds.tsv"), sep = "\t", index = False)
 
 
 if __name__=="__main__":

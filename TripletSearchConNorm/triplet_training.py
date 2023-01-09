@@ -110,8 +110,6 @@ def model_training(
         handlers=[LoggingHandler()],
     )
 
-    output_path = os.path.join(output_path, datetime.now().strftime("%Y_%m_%d_%H_%M_%S"))
-
     os.makedirs(output_path, exist_ok=True)
 
     # You can specify any huggingface/transformers pre-trained model here, for example, bert-base-uncased, roberta-base, xlm-roberta-base

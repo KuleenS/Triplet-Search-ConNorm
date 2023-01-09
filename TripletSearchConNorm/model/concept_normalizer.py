@@ -4,13 +4,7 @@ Created on March 18 2021
 
 Part of this library is based on sentence-transformers[https://github.com/UKPLab/sentence-transformers]
 """
-import math
-import queue
-
 import numpy as np
-import torch
-import torch.multiprocessing as mp
-import transformers
 from sentence_transformers import SentenceTransformer, models
 from sklearn.metrics.pairwise import cosine_similarity
 
