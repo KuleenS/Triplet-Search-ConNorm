@@ -41,7 +41,7 @@ def main(args):
     if not os.path.exists(args.output_path):
         os.makedirs(args.output_path, exist_ok = True)
 
-    df.to_csv(os.path.join(args.output_path, "TripletPreds.tsv"), sep = "\t", index = False)
+    df.to_csv(os.path.join(args.output_path, "NormPreds.tsv"), sep = "\t", index = False)
 
 
 if __name__=="__main__":
